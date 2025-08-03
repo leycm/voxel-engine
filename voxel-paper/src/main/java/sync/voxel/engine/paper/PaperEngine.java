@@ -9,9 +9,7 @@
  */
 package sync.voxel.engine.paper;
 
-import org.bukkit.inventory.ItemStack;
 import sync.voxel.engine.api.VoxEngine;
-import sync.voxel.engine.api.utils.item.VoxItem;
 
 public class PaperEngine implements VoxEngine {
 
