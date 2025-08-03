@@ -9,6 +9,7 @@
  */
 package sync.voxel.engine.api.registry;
 
+import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,20 @@ public final class VoxIdentifier {
     private final String namespace;
     private final String key;
     private final String type;
+
+    /**
+     * Parses a string representation of a {@code VoxIdentifier}.
+     * Expected format is {@code namespace:key} or {@code namespace:key:type}.
+     *
+     * @param namespacedKey the bukkit {@link org.bukkit.NamespacedKey}
+     * @return the {@code VoxIdentifier} for the {@link org.bukkit.NamespacedKey}
+     * @throws IllegalArgumentException if the format is invalid or contains illegal characters
+     */
+    @Contract(value = "_ -> new", pure = true)
+    public static @NotNull VoxIdentifier represent(@NotNull NamespacedKey namespacedKey) {
+        return VoxIdentifier.parse(namespacedKey.toString());
+    }
+
 
     /**
      * Parses a string representation of a {@code VoxIdentifier}.

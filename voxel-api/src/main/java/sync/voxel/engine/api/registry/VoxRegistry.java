@@ -9,6 +9,7 @@
  */
 package sync.voxel.engine.api.registry;
 
+import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -47,6 +48,16 @@ public class VoxRegistry<VRI extends VoxIdentifiable> {
      */
     public VRI valueOf(@NotNull VoxIdentifier id) {
         return entries.get(id);
+    }
+
+    /**
+     * Returns an element by its identifier.
+     *
+     * @param identifier the identifier
+     * @return the element, or null if not found
+     */
+    public VRI valueOf(@NotNull NamespacedKey identifier) {
+        return entries.get(VoxIdentifier.represent(identifier));
     }
 
     /**
