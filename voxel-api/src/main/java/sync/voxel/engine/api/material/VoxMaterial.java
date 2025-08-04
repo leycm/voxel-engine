@@ -19,13 +19,14 @@ import sync.voxel.engine.api.registry.VoxIdentifiable;
  */
 public interface VoxMaterial extends VoxIdentifiable {
 
-
     /**
      * Convert to a default {@link org.bukkit.Material}
      * <p>
      * Cannot be null or an {@link org.bukkit.Material}  like AIR except its {@code minecraft:air}.
      */
     Material toVaMaterial();
+
+    boolean isVanillaMaterial();
 
     /**
      * Gets a specific setting value from this material's configuration.

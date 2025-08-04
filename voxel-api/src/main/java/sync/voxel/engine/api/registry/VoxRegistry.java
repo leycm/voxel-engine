@@ -11,6 +11,8 @@ package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.material.VoxMaterialRegistry;
+import sync.voxel.engine.api.material.VoxMaterialBehaviorRegistry;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +26,10 @@ import java.util.Map;
  */
 public class VoxRegistry<VRI extends VoxIdentifiable> {
 
-    private final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
+    public static final VoxMaterialBehaviorRegistry MATERIAL_GROUP = new VoxMaterialBehaviorRegistry();
+    public static final VoxMaterialRegistry MATERIAL = new VoxMaterialRegistry();
+
+    protected final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
 
     /**
      * Registers an element into the registry.

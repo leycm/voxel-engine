@@ -10,11 +10,9 @@ repositories {
 
 dependencies {
     if (project.name != "api") implementation(project(":api"))
-    if (project.name != "api" && project.name != "common") implementation(project(":api"))
+    if (project.name != "api" && project.name != "common") implementation(project(":common"))
 
     implementation("org.leycm.frames:the-frame:1.3.15")
-
-    compileOnly("io.papermc.paper:paper-api:${project.properties["minecraft_version"]}-R0.1-SNAPSHOT")
 
     compileOnly("com.github.retrooper:packetevents-spigot:2.8.0")
 

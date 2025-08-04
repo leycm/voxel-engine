@@ -10,7 +10,9 @@
 package sync.voxel.engine.paper;
 
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.common.logger.VoxelLogger;
 
-public class PaperEngine implements VoxEngine {
-
+public class VoxelEngine implements VoxEngine {
+    public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
+    public static boolean IS_BUILDING;
 }
