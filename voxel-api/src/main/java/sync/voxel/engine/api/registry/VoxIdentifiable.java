@@ -7,10 +7,14 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.paper;
+package sync.voxel.engine.api.registry;
+/**
+ * Something that has a {@link VoxIdentifier}.
+ */
+public interface VoxIdentifiable {
 
-import sync.voxel.engine.api.VoxEngine;
-
-public class PaperEngine implements VoxEngine {
-
+    /**
+     * Get the {@link VoxIdentifier} of the object.
+     */
+    VoxIdentifier identifier();
 }
