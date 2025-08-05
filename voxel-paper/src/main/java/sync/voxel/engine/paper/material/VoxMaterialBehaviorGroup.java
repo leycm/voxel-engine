@@ -1,7 +1,8 @@
-package sync.voxel.engine.api.material;
+package sync.voxel.engine.paper.material;
 
 import org.jetbrains.annotations.NotNull;
 import sync.voxel.engine.api.group.VoxBehaviorGroup;
+import sync.voxel.engine.api.material.VoxMaterial;
 import sync.voxel.engine.api.registry.VoxIdentifier;
 
 import java.util.HashMap;

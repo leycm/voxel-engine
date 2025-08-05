@@ -10,5 +10,4 @@
 package sync.voxel.engine.api;
 
 public interface VoxEngine {
-
 }

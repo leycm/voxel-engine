@@ -10,6 +10,7 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
+import sync.voxel.engine.api.group.VoxRenderGroupType;
 import sync.voxel.engine.api.registry.VoxIdentifiable;
 
 /**
@@ -27,6 +28,8 @@ public interface VoxMaterial extends VoxIdentifiable {
     Material toVaMaterial();
 
     boolean isVanillaMaterial();
+
+    VoxRenderGroupType getVoxRenderType();
 
     /**
      * Gets a specific setting value from this material's configuration.
