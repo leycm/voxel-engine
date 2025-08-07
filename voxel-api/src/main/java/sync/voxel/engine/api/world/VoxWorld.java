@@ -7,16 +7,10 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api;
+package sync.voxel.engine.api.world;
 
-import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.api.util.uuid.VoxUuIdentifiable;
 
-import java.util.Collection;
-import java.util.UUID;
+public interface VoxWorld extends VoxUuIdentifiable {
 
-public interface VoxEngine {
-
-    VoxWorld getWorld(UUID uuid);
-
-    Collection<VoxWorld> getWorlds();
 }

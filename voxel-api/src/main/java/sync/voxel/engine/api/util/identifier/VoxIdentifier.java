@@ -7,7 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.registry;
+package sync.voxel.engine.api.util.identifier;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Contract;

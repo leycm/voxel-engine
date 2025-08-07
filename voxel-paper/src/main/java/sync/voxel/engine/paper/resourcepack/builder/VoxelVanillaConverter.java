@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 import sync.voxel.engine.paper.material.VoxMaterialBehaviorGroup;
-import sync.voxel.engine.api.registry.VoxIdentifier;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.api.registry.VoxRegistries;
 import sync.voxel.engine.paper.material.VoxelBukkitMaterial;
 

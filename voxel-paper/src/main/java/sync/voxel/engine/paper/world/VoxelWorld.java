@@ -7,14 +7,16 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.registry;
-/**
- * Something that has a {@link VoxIdentifier}.
- */
-public interface VoxIdentifiable {
+package sync.voxel.engine.paper.world;
 
-    /**
-     * Get the {@link VoxIdentifier} of the object.
-     */
-    VoxIdentifier identifier();
+import sync.voxel.engine.api.world.VoxWorld;
+
+import java.util.UUID;
+
+public class VoxelWorld implements VoxWorld {
+
+    @Override
+    public UUID uuid() {
+        return null;
+    }
 }

@@ -10,9 +10,30 @@
 package sync.voxel.engine.paper;
 
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.world.VoxWorld;
 import sync.voxel.engine.common.logger.VoxelLogger;
 
+import java.util.*;
+
 public class VoxelEngine implements VoxEngine {
+
     public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
     public static boolean IS_BUILDING;
+
+    public static Set<VoxWorld> worlds = new HashSet<>();
+
+    @Override
+    public VoxWorld getWorld(UUID uuid) {
+        for (VoxWorld world : worlds)
+            if (world.uuid().equals(uuid))
+                return world;
+
+        return null;
+    }
+
+    @Override
+    public Collection<VoxWorld> getWorlds() {
+        return Collections.unmodifiableSet(worlds);
+    }
+
 }

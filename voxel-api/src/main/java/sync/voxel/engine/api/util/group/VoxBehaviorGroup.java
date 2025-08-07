@@ -7,10 +7,10 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.group;
+package sync.voxel.engine.api.util.group;
 
 import sync.voxel.engine.api.material.VoxMaterial;
-import sync.voxel.engine.api.registry.VoxIdentifiable;
+import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
 
 /**
  * Represents a group of {@link VoxMaterial}s.

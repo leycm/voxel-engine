@@ -10,8 +10,8 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
-import sync.voxel.engine.api.group.VoxRenderGroupType;
-import sync.voxel.engine.api.registry.VoxIdentifiable;
+import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
+import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
 
 /**
  * Represents a custom material in the Voxel engine that is linked to a Bukkit {@link Material}.
@@ -29,7 +29,7 @@ public interface VoxMaterial extends VoxIdentifiable {
 
     boolean isVanillaMaterial();
 
-    VoxRenderGroupType getVoxRenderType();
+    VoxMaterialPresets getVoxRenderType();
 
     /**
      * Gets a specific setting value from this material's configuration.

@@ -11,8 +11,8 @@ package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.api.material.VoxMaterialRegistry;
-import sync.voxel.engine.api.material.VoxMaterialBehaviorRegistry;
+import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -25,9 +25,6 @@ import java.util.Map;
  * @param <VRI> the type of elements must implement VoxIdentifiable
  */
 public class VoxRegistry<VRI extends VoxIdentifiable> {
-
-    public static final VoxMaterialBehaviorRegistry MATERIAL_GROUP = new VoxMaterialBehaviorRegistry();
-    public static final VoxMaterialRegistry MATERIAL = new VoxMaterialRegistry();
 
     protected final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
 

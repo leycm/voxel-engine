@@ -10,7 +10,21 @@
 package sync.voxel.engine.velocity;
 
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.world.VoxWorld;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public class VelocityEngine implements VoxEngine {
 
+    @Override
+    public VoxWorld getWorld(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public Collection<VoxWorld> getWorlds() {
+        return List.of();
+    }
 }

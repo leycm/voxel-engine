@@ -4,9 +4,9 @@ import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import sync.voxel.engine.api.group.VoxRenderGroupType;
+import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
 import sync.voxel.engine.api.material.VoxMaterial;
-import sync.voxel.engine.api.registry.VoxIdentifier;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 public class VoxelBukkitMaterial implements VoxMaterial {
     private final VoxIdentifier identifier;
@@ -28,8 +28,8 @@ public class VoxelBukkitMaterial implements VoxMaterial {
     }
 
     @Override
-    public VoxRenderGroupType getVoxRenderType() {
-        return VoxRenderGroupType.VANILLA; // TODO : impl this @LeyCM
+    public VoxMaterialPresets getVoxRenderType() {
+        return VoxMaterialPresets.VANILLA;
     }
 
     @Override
