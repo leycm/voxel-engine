@@ -15,7 +15,7 @@ import sync.voxel.engine.common.logger.VoxelLogger;
 
 import java.util.*;
 
-public class VoxelEngine implements VoxEngine {
+public class VoxelPaperEngine implements VoxEngine {
 
     public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
     public static boolean IS_BUILDING;

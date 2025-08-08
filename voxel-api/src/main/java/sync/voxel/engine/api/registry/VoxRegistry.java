@@ -11,6 +11,7 @@ package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.namespace.VoxNameSpace;
 import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
 import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
@@ -36,9 +37,15 @@ public class VoxRegistry<VRI extends VoxIdentifiable> {
      */
     public void register(@NotNull VRI element) {
         VoxIdentifier identifier = element.identifier();
+
+        if (!VoxRegistries.NAME_SPACES.contains(identifier)) {
+            VoxRegistries.NAME_SPACES.register(VoxNameSpace.of(identifier.namespace()));
+        }
+
         if (entries.containsKey(identifier)) {
             throw new IllegalArgumentException("Identifier already registered: " + identifier);
         }
+
         entries.put(identifier, element);
     }
 

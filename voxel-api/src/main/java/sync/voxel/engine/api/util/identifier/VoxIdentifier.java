@@ -10,6 +10,7 @@
 package sync.voxel.engine.api.util.identifier;
 
 import org.bukkit.NamespacedKey;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

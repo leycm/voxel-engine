@@ -9,9 +9,10 @@
  */
 package sync.voxel.engine.api.material;
 
-import org.jetbrains.annotations.ApiStatus;
 import sync.voxel.engine.api.util.group.VoxBehaviorGroup;
 import sync.voxel.engine.api.registry.VoxRegistry;
+
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;

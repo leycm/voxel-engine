@@ -14,11 +14,16 @@ import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PaperPlugin extends JavaPlugin {
+import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.paper.resourcepack.builder.VoxelResourcePackBuilder;
+import sync.voxel.engine.paper.resourcepack.builder.VoxelVanillaConverter;
 
-    public static PaperPlugin plugin;
+public class VoxelPaperPlugin extends JavaPlugin {
+
+    public static VoxelPaperPlugin plugin;
     public static Component prefix = Component.text("V").color(TextColor.color(0xff0241)).append(Component.text("E").color(TextColor.color(0x00244f)).append(Component.text(" »").color(TextColor.color(0x555555)))) ;
 
     @Override
@@ -30,15 +35,18 @@ public class PaperPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        PaperPlugin.plugin = this;
-        sync.voxel.engine.api.VoxelEngine.register(new VoxelEngine());
+        VoxelPaperPlugin.plugin = this;
+        VoxelEngine.register(new VoxelPaperEngine());
         PacketEvents.getAPI().init();
+
+        VoxelVanillaConverter.convertVanilla();
+        VoxelResourcePackBuilder.buildPack("startup");
 
     }
 
     @Override
     public void onDisable() {
-        sync.voxel.engine.api.VoxelEngine.unregister();
+        VoxelEngine.unregister();
         PacketEvents.getAPI().terminate();
     }
 

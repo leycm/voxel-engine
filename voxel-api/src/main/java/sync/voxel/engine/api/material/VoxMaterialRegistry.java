@@ -10,10 +10,12 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
+
 import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.api.registry.VoxRegistry;
+
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 public class VoxMaterialRegistry extends VoxRegistry<VoxMaterial> {
 
