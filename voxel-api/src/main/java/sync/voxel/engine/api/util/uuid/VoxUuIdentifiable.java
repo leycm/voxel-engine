@@ -7,10 +7,18 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.paper;
+package sync.voxel.engine.api.util.uuid;
 
-import sync.voxel.engine.api.VoxEngine;
+import java.util.UUID;
 
-public class PaperEngine implements VoxEngine {
+/**
+ * Something that has a {@link java.util.UUID} identity.
+ */
+public interface VoxUuIdentifiable {
+
+    /**
+     * Get the {@link java.util.UUID}
+     */
+    UUID uuid();
 
 }

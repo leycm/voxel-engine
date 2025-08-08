@@ -7,24 +7,33 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.velocity;
+package sync.voxel.engine.paper;
 
 import sync.voxel.engine.api.VoxEngine;
 import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.common.logger.VoxelLogger;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-public class VelocityEngine implements VoxEngine {
+public class VoxelEngine implements VoxEngine {
+
+    public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
+    public static boolean IS_BUILDING;
+
+    public static Set<VoxWorld> worlds = new HashSet<>();
 
     @Override
     public VoxWorld getWorld(UUID uuid) {
+        for (VoxWorld world : worlds)
+            if (world.uuid().equals(uuid))
+                return world;
+
         return null;
     }
 
     @Override
     public Collection<VoxWorld> getWorlds() {
-        return List.of();
+        return Collections.unmodifiableSet(worlds);
     }
+
 }

@@ -7,7 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.registry;
+package sync.voxel.engine.api.util.identifier;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Contract;
@@ -168,7 +168,7 @@ public final class VoxIdentifier {
      * Validates a string to ensure all characters are allowed.
      *
      * @param value the string to validate
-     * @param name  name of the field (for error message)
+     * @param name  name of the field (for an error message)
      */
     private static void validate(String value, String name) {
         if (value == null || value.isBlank()) {

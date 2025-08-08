@@ -13,7 +13,7 @@ public class VoxelLogger {
     private final String coloredPrefix;
     private VoxelLogLevel currentLevel = VoxelLogLevel.INFO;
 
-    VoxelLogger(String prefix) {
+    public VoxelLogger(String prefix) {
         this.prefix = prefix;
         this.coloredPrefix = AsciColorUtil.colorizePrefix(prefix,
                 new Color(0xFF0241),

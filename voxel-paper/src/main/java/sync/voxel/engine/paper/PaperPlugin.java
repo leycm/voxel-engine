@@ -16,8 +16,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import sync.voxel.engine.api.VoxelEngine;
-
 public class PaperPlugin extends JavaPlugin {
 
     public static PaperPlugin plugin;
@@ -33,14 +31,14 @@ public class PaperPlugin extends JavaPlugin {
     public void onEnable() {
 
         PaperPlugin.plugin = this;
-        VoxelEngine.register(new PaperEngine());
+        sync.voxel.engine.api.VoxelEngine.register(new VoxelEngine());
         PacketEvents.getAPI().init();
 
     }
 
     @Override
     public void onDisable() {
-        VoxelEngine.unregister();
+        sync.voxel.engine.api.VoxelEngine.unregister();
         PacketEvents.getAPI().terminate();
     }
 

@@ -10,7 +10,8 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
-import sync.voxel.engine.api.registry.VoxIdentifiable;
+import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
+import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
 
 /**
  * Represents a custom material in the Voxel engine that is linked to a Bukkit {@link Material}.
@@ -19,13 +20,16 @@ import sync.voxel.engine.api.registry.VoxIdentifiable;
  */
 public interface VoxMaterial extends VoxIdentifiable {
 
-
     /**
      * Convert to a default {@link org.bukkit.Material}
      * <p>
      * Cannot be null or an {@link org.bukkit.Material}  like AIR except its {@code minecraft:air}.
      */
     Material toVaMaterial();
+
+    boolean isVanillaMaterial();
+
+    VoxMaterialPresets getVoxRenderType();
 
     /**
      * Gets a specific setting value from this material's configuration.

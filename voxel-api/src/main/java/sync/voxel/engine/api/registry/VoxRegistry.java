@@ -11,6 +11,8 @@ package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +26,7 @@ import java.util.Map;
  */
 public class VoxRegistry<VRI extends VoxIdentifiable> {
 
-    private final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
+    protected final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
 
     /**
      * Registers an element into the registry.
