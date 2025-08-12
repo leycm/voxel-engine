@@ -13,6 +13,7 @@ import org.bukkit.NamespacedKey;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.VoxelEngine;
 
 /**
  * A {@code VoxIdentifier} is used to uniquely identify resources in the VoxelSync engine.
@@ -129,6 +130,10 @@ public final class VoxIdentifier {
         return type;
     }
 
+    public String translate(String langCode) {
+        return VoxelEngine.translate(langCode, this);
+    }
+
     /**
      * Converts the identifier to string using ":" as default separator.
      *
@@ -158,6 +163,7 @@ public final class VoxIdentifier {
      */
     public String toString(char separator, int type) {
         return switch (type) {
+            case 3 -> translate("en" + separator + "us");
             case 2 -> this.type + separator + namespace + separator + key;
             case 1 -> namespace + separator + key;
             case 0 -> key;

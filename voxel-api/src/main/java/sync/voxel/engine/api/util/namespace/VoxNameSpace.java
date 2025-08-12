@@ -1,4 +1,4 @@
-package sync.voxel.engine.api.namespace;
+package sync.voxel.engine.api.util.namespace;
 
 import org.bukkit.Material;
 import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
@@ -37,7 +37,7 @@ public class VoxNameSpace implements VoxIdentifiable {
     private VoxNameSpace(@NotNull String namespace, @NotNull String displayName) {
         this.namespace = namespace;
         this.displayName = displayName;
-        this.identifier = VoxIdentifier.of(namespace, "air");
+        this.identifier = VoxIdentifier.of(namespace, "namespace");
     }
 
     @Override

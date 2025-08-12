@@ -11,6 +11,7 @@ package sync.voxel.engine.api;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NonNull;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 
 public final class VoxelEngine {
@@ -56,5 +57,9 @@ public final class VoxelEngine {
     }
 
     // ===== VO_ENGINE TUNNEL =====
+
+    public static String translate(String langCode, VoxIdentifier identifier) {
+        return engine.translate(langCode, identifier);
+    }
 
 }

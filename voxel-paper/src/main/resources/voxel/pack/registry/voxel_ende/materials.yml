@@ -40,7 +40,7 @@ voxel_ende:void_core:
     {
     }
 
-  poshen_effect:
+  potion_effects:
     onChest:
       effect: 1 - 255;
 

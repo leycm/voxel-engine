@@ -34,13 +34,13 @@ public class VoxelResourcePackBuilder {
      */
     public static void buildPack(String reason) {
         if (!Files.exists(TARGET_REGISTRY)) {
-            VoxelPaperEngine.LOGGER.info("\"registry/\" folder not found – extracting default pack from JAR...");
+            VoxelPaperEngine.LOGGER.info("\"registry/\" folder not found extracting default pack from JAR...");
             boolean success = extractResourcePackFromJar();
             if (!success) {
                 VoxelPaperEngine.LOGGER.error("Failed to extract resource pack from JAR.");
             }
         } else {
-            VoxelPaperEngine.LOGGER.debug("registry/ folder found – skipping default pack copy.");
+            VoxelPaperEngine.LOGGER.debug("registry/ folder found skipping default pack copy.");
         }
     }
 

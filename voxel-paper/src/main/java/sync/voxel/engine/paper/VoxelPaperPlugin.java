@@ -18,13 +18,13 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.common.logger.VoxelLogLevel;
 import sync.voxel.engine.paper.resourcepack.builder.VoxelResourcePackBuilder;
 import sync.voxel.engine.paper.resourcepack.converter.VoxelVanillaConverter;
 
 public class VoxelPaperPlugin extends JavaPlugin {
 
     public static VoxelPaperPlugin plugin;
-    public static Component prefix = Component.text("V").color(TextColor.color(0xff0241)).append(Component.text("E").color(TextColor.color(0x00244f)).append(Component.text(" »").color(TextColor.color(0x555555)))) ;
 
     @Override
     public void onLoad() {
@@ -37,6 +37,7 @@ public class VoxelPaperPlugin extends JavaPlugin {
 
         VoxelPaperPlugin.plugin = this;
         VoxelEngine.register(new VoxelPaperEngine());
+        VoxelPaperEngine.LOGGER.setLevel(VoxelLogLevel.DEBUG);
         PacketEvents.getAPI().init();
 
         VoxelVanillaConverter.convertVanilla();

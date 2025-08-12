@@ -7,7 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.namespace;
+package sync.voxel.engine.api.util.namespace;
 
 import sync.voxel.engine.api.registry.VoxRegistry;
 import sync.voxel.engine.api.util.identifier.VoxIdentifier;

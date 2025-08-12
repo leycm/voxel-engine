@@ -13,6 +13,7 @@ dependencies {
     if (project.name != "api" && project.name != "common") implementation(project(":common"))
 
     implementation("org.leycm.frames:the-frame:1.3.15")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     compileOnly("com.github.retrooper:packetevents-spigot:2.8.0")
 

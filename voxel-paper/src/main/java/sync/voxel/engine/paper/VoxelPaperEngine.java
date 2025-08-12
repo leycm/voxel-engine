@@ -10,9 +10,12 @@
 package sync.voxel.engine.paper;
 
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.api.world.VoxWorld;
 import sync.voxel.engine.common.logger.VoxelLogger;
+import sync.voxel.engine.common.translation.TranslationManager;
 
+import java.io.File;
 import java.util.*;
 
 public class VoxelPaperEngine implements VoxEngine {
@@ -20,7 +23,8 @@ public class VoxelPaperEngine implements VoxEngine {
     public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
     public static boolean IS_BUILDING;
 
-    public static Set<VoxWorld> worlds = new HashSet<>();
+    private static final Set<VoxWorld> worlds = new HashSet<>();
+    private final TranslationManager translationManager = new TranslationManager(new File("plugins/voxel/pack/translations"), LOGGER);
 
     @Override
     public VoxWorld getWorld(UUID uuid) {
@@ -34,6 +38,11 @@ public class VoxelPaperEngine implements VoxEngine {
     @Override
     public Collection<VoxWorld> getWorlds() {
         return Collections.unmodifiableSet(worlds);
+    }
+
+    @Override
+    public String translate(String langCode, VoxIdentifier identifier) {
+        return translationManager.translate(langCode, identifier);
     }
 
 }

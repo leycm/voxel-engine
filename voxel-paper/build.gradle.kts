@@ -12,7 +12,7 @@ dependencies {
     if (project.name != "api") implementation(project(":api"))
     if (project.name != "api" && project.name != "common") implementation(project(":common"))
     implementation("org.leycm.frames:the-frame:1.3.15")
-    implementation("com.github.retrooper:packetevents-spigot:2.8.0")
+    implementation("com.github.retrooper:packetevents-spigot:2.9.4")
 
     compileOnly("io.papermc.paper:paper-api:${project.properties["minecraft_version"]}-R0.1-SNAPSHOT")
 

@@ -8,6 +8,7 @@ import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
 import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.paper.resourcepack.entry.VoxPackMaterialEntry;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
@@ -29,7 +30,7 @@ public class VoxelMaterialYamlReader {
                 if (Files.isDirectory(nsDir)) {
                     Path materialFile = nsDir.resolve("material.yml");
                     if (Files.exists(materialFile)) {
-                        List<VoxPackMaterialEntry> entries = readMaterialFile(materialFile, nsDir.getFileName().toString());
+                        List<VoxPackMaterialEntry> entries = readMaterialFile(materialFile);
                         materialsByNamespace.put(nsDir.getFileName().toString(), entries);
                     }
                 }
@@ -39,27 +40,29 @@ public class VoxelMaterialYamlReader {
         return materialsByNamespace;
     }
 
-    private List<VoxPackMaterialEntry> readMaterialFile(@NotNull Path materialFile, String namespace) throws IOException {
+    private @NotNull List<VoxPackMaterialEntry> readMaterialFile(@NotNull Path materialFile) throws IOException {
         Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
         try (InputStream in = Files.newInputStream(materialFile)) {
             Object loaded = yaml.load(in);
             if (!(loaded instanceof Map)) {
                 throw new IOException("Invalid material.yml format, expected Map at root.");
             }
+
+            //noinspection unchecked
             Map<String, Object> rootMap = (Map<String, Object>) loaded;
             List<VoxPackMaterialEntry> entries = new ArrayList<>();
 
             for (Map.Entry<String, Object> e : rootMap.entrySet()) {
-                String keyPart = e.getKey();
                 Object value = e.getValue();
+                String[] materialId = e.getKey().split(":");
+
+                VoxIdentifier identifier = VoxIdentifier.of(materialId[0], materialId[1], "material");
 
                 if (!(value instanceof Map)) {
-                    throw new IOException("Material entry for " + keyPart + " is not a Map.");
+                    throw new IOException("Material entry for " + identifier + " is not a Map.");
                 }
 
-                String idString = namespace + ":" + Arrays.toString(keyPart.split(":"));
-                VoxIdentifier identifier = VoxIdentifier.parse(keyPart);
-
+                //noinspection unchecked
                 VoxPackMaterialEntry entry = parseMaterialEntry(identifier, (Map<String, Object>) value);
                 entries.add(entry);
             }
@@ -68,7 +71,7 @@ public class VoxelMaterialYamlReader {
         }
     }
 
-    private VoxPackMaterialEntry parseMaterialEntry(VoxIdentifier identifier, Map<String, Object> data) {
+    private @NotNull VoxPackMaterialEntry parseMaterialEntry(VoxIdentifier identifier, @NotNull Map<String, Object> data) {
         VoxPackMaterialEntry entry = new VoxPackMaterialEntry();
         entry.setIdentifier(identifier);
 
@@ -83,13 +86,33 @@ public class VoxelMaterialYamlReader {
         }
 
         if (data.containsKey("appearance") && data.get("appearance") instanceof Map) {
-            entry.setAppearance((Map<String, Object>) data.get("appearance"));
+            //noinspection unchecked
+            Map<String, Object> rawAppearance = (Map<String, Object>) data.get("appearance");
+            Map<String, File> converted = new HashMap<>();
+            for (Map.Entry<String, Object> ap : rawAppearance.entrySet()) {
+                if (ap.getValue() instanceof String) {
+                    converted.put(ap.getKey(), new File((String) ap.getValue()));
+                }
+            }
+            entry.setAppearance(converted);
         }
 
         if (data.containsKey("settings") && data.get("settings") instanceof Map) {
+            //noinspection unchecked
             entry.setSettings((Map<String, Object>) data.get("settings"));
+        }
+
+        if (data.containsKey("potion_effects") && data.get("potion_effects") instanceof Map) {
+            //noinspection unchecked
+            entry.setPotion_effects((Map<String, Object>) data.get("potion_effects"));
+        }
+
+        if (data.containsKey("attributes") && data.get("attributes") instanceof Map) {
+            //noinspection unchecked
+            entry.setAttributes((Map<String, Object>) data.get("attributes"));
         }
 
         return entry;
     }
+
 }

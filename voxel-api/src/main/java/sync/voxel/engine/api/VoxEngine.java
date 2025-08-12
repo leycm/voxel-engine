@@ -9,6 +9,7 @@
  */
 package sync.voxel.engine.api;
 
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.Collection;
@@ -19,4 +20,6 @@ public interface VoxEngine {
     VoxWorld getWorld(UUID uuid);
 
     Collection<VoxWorld> getWorlds();
+
+    String translate(String langCode, VoxIdentifier identifier);
 }

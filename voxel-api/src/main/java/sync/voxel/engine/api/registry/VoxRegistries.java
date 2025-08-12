@@ -11,7 +11,7 @@ package sync.voxel.engine.api.registry;
 
 import sync.voxel.engine.api.material.VoxMaterialBehaviorRegistry;
 import sync.voxel.engine.api.material.VoxMaterialRegistry;
-import sync.voxel.engine.api.namespace.VoxNameSpaceRegistry;
+import sync.voxel.engine.api.util.namespace.VoxNameSpaceRegistry;
 
 public class VoxRegistries {
     public static final VoxMaterialRegistry MATERIAL = new VoxMaterialRegistry();

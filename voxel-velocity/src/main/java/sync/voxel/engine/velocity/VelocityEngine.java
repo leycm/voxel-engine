@@ -10,6 +10,7 @@
 package sync.voxel.engine.velocity;
 
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.Collection;
@@ -26,5 +27,10 @@ public class VelocityEngine implements VoxEngine {
     @Override
     public Collection<VoxWorld> getWorlds() {
         return List.of();
+    }
+
+    @Override
+    public String translate(String langCode, VoxIdentifier identifier) {
+        return "";
     }
 }

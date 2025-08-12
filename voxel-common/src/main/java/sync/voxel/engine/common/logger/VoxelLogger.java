@@ -15,12 +15,12 @@ public class VoxelLogger {
 
     public VoxelLogger(String prefix) {
         this.prefix = prefix;
-        this.coloredPrefix = AsciColorUtil.colorizePrefix(prefix,
+        this.coloredPrefix = "[ " +  AsciColorUtil.colorizePrefix(prefix,
                 new Color(0xFF0241),
                 new Color(0xFF0241),
-                new Color(0x002450),
-                new Color(0x002450)
-        );
+                new Color(0x003E83),
+                new Color(0x003E83)
+        ) + " ]:";
 
     }
 
