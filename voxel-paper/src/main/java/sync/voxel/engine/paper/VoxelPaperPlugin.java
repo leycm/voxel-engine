@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import sync.voxel.engine.api.VoxelEngine;
 import sync.voxel.engine.paper.resourcepack.builder.VoxelResourcePackBuilder;
-import sync.voxel.engine.paper.resourcepack.builder.VoxelVanillaConverter;
+import sync.voxel.engine.paper.resourcepack.converter.VoxelVanillaConverter;
 
 public class VoxelPaperPlugin extends JavaPlugin {
 

@@ -1,4 +1,4 @@
-package sync.voxel.engine.paper.resourcepack.builder;
+package sync.voxel.engine.paper.resourcepack.converter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
