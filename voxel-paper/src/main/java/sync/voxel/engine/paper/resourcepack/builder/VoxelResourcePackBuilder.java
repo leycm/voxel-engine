@@ -36,9 +36,7 @@ public class VoxelResourcePackBuilder {
         if (!Files.exists(TARGET_REGISTRY)) {
             VoxelPaperEngine.LOGGER.info("\"registry/\" folder not found extracting default pack from JAR...");
             boolean success = extractResourcePackFromJar();
-            if (!success) {
-                VoxelPaperEngine.LOGGER.error("Failed to extract resource pack from JAR.");
-            }
+            if (!success) VoxelPaperEngine.LOGGER.error("Failed to extract resource pack from JAR.");
         } else {
             VoxelPaperEngine.LOGGER.debug("registry/ folder found skipping default pack copy.");
         }
@@ -74,23 +72,26 @@ public class VoxelResourcePackBuilder {
     private static void extractFromJar(@NotNull URL resource) throws IOException {
         String pathInJar = RESOURCE_BASE + "/";
         String jarPath = resource.getPath().substring(5, resource.getPath().indexOf("!"));
+
         try (JarFile jarFile = new JarFile(URLDecoder.decode(jarPath, StandardCharsets.UTF_8))) {
+
             Enumeration<JarEntry> entries = jarFile.entries();
             while (entries.hasMoreElements()) {
+
                 JarEntry entry = entries.nextElement();
-                if (entry.getName().startsWith(pathInJar)) {
-                    String relativePath = entry.getName().substring(pathInJar.length());
-                    Path outPath = TARGET_PACK.resolve(relativePath);
-                    if (entry.isDirectory()) {
-                        Files.createDirectories(outPath);
-                    } else {
-                        try (InputStream in = jarFile.getInputStream(entry)) {
-                            Files.createDirectories(outPath.getParent());
-                            Files.copy(in, outPath, StandardCopyOption.REPLACE_EXISTING);
-                        }
+                if (!entry.getName().startsWith(pathInJar)) continue;
+
+                String relativePath = entry.getName().substring(pathInJar.length());
+                Path outPath = TARGET_PACK.resolve(relativePath);
+
+                if (!entry.isDirectory()) {
+                    try (InputStream in = jarFile.getInputStream(entry)) {
+                        Files.createDirectories(outPath.getParent());
+                        Files.copy(in, outPath, StandardCopyOption.REPLACE_EXISTING);
                     }
-                }
+                } else Files.createDirectories(outPath);
             }
         }
+
     }
 }

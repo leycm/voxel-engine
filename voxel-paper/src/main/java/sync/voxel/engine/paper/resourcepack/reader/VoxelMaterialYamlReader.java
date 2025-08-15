@@ -27,13 +27,13 @@ public class VoxelMaterialYamlReader {
 
         try (DirectoryStream<Path> namespaceDirs = Files.newDirectoryStream(REGISTRY_PATH)) {
             for (Path nsDir : namespaceDirs) {
-                if (Files.isDirectory(nsDir)) {
-                    Path materialFile = nsDir.resolve("material.yml");
-                    if (Files.exists(materialFile)) {
-                        List<VoxPackMaterialEntry> entries = readMaterialFile(materialFile);
-                        materialsByNamespace.put(nsDir.getFileName().toString(), entries);
-                    }
-                }
+                if (!Files.isDirectory(nsDir)) continue;
+
+                Path materialFile = nsDir.resolve("material.yml");
+                if (Files.exists(materialFile)) continue;
+
+                List<VoxPackMaterialEntry> entries = readMaterialFile(materialFile);
+                materialsByNamespace.put(nsDir.getFileName().toString(), entries);
             }
         }
 

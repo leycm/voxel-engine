@@ -28,6 +28,7 @@ public class VoxelPaperPlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        System.out.println();
         PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
         PacketEvents.getAPI().load();
     }
