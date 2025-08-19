@@ -9,7 +9,9 @@
  */
 package sync.voxel.engine.velocity;
 
+import org.slf4j.Logger;
 import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.Collection;
@@ -19,6 +21,11 @@ import java.util.UUID;
 public class VelocityEngine implements VoxEngine {
 
     @Override
+    public boolean registerWorld(VoxWorld world) {
+        return false;
+    }
+
+    @Override
     public VoxWorld getWorld(UUID uuid) {
         return null;
     }
@@ -26,5 +33,15 @@ public class VelocityEngine implements VoxEngine {
     @Override
     public Collection<VoxWorld> getWorlds() {
         return List.of();
+    }
+
+    @Override
+    public Logger logger() {
+        return null;
+    }
+
+    @Override
+    public String translate(String langCode, VoxIdentifier identifier) {
+        return "";
     }
 }

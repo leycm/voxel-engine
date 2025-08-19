@@ -13,6 +13,7 @@ dependencies {
     if (project.name != "api" && project.name != "common") implementation(project(":api"))
 
     implementation("org.leycm.frames:the-frame:1.3.15")
+    implementation("org.slf4j:slf4j-api:2.0.17")
 
     compileOnly("io.papermc.paper:paper-api:${project.properties["minecraft_version"]}-R0.1-SNAPSHOT")
 

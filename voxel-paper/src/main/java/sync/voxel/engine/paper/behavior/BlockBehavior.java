@@ -7,10 +7,15 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.world;
+package sync.voxel.engine.paper.behavior;
 
-import sync.voxel.engine.api.identifier.VoxUuIdentifiable;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPhysicsEvent;
 
-public interface VoxWorld extends VoxUuIdentifiable {
+public class BlockBehavior implements Listener {
+
+    public void onBlockUpdate(BlockPhysicsEvent event) {
+
+    }
 
 }

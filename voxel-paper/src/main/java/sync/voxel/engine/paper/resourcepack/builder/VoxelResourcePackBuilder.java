@@ -10,7 +10,8 @@
 package sync.voxel.engine.paper.resourcepack.builder;
 
 import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.paper.VoxelEngine;
+import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.paper.VoxelPaperEngine;
 
 import java.io.*;
 import java.net.*;
@@ -32,15 +33,13 @@ public class VoxelResourcePackBuilder {
     /**
      * Builds the resource pack by ensuring required files are in place.
      */
-    public static void buildPack(String unused) {
+    public static void buildPack(String reason) {
         if (!Files.exists(TARGET_REGISTRY)) {
-            VoxelEngine.LOGGER.info("\"registry/\" folder not found – extracting default pack from JAR...");
+            VoxelEngine.logger().info("\"registry/\" folder not found extracting default pack from JAR...");
             boolean success = extractResourcePackFromJar();
-            if (!success) {
-                VoxelEngine.LOGGER.error("Failed to extract resource pack from JAR.");
-            }
+            if (!success) VoxelEngine.logger().error("Failed to extract resource pack from JAR.");
         } else {
-            VoxelEngine.LOGGER.debug("registry/ folder found – skipping default pack copy.");
+            VoxelEngine.logger().debug("registry/ folder found skipping default pack copy.");
         }
     }
 
@@ -62,11 +61,11 @@ public class VoxelResourcePackBuilder {
                 throw new UnsupportedOperationException("Unsupported protocol: " + resource.getProtocol());
             }
 
-            VoxelEngine.LOGGER.info("Resource pack extracted to plugins/voxel/pack.");
+            VoxelEngine.logger().info("Resource pack extracted to plugins/voxel/pack.");
             return true;
 
         } catch (Exception e) {
-            VoxelEngine.LOGGER.error("Extraction failed: {}\n{}", e.getMessage(), e);
+            VoxelEngine.logger().error("Extraction failed: {}", e.getMessage(), e);
             return false;
         }
     }
@@ -74,23 +73,26 @@ public class VoxelResourcePackBuilder {
     private static void extractFromJar(@NotNull URL resource) throws IOException {
         String pathInJar = RESOURCE_BASE + "/";
         String jarPath = resource.getPath().substring(5, resource.getPath().indexOf("!"));
+
         try (JarFile jarFile = new JarFile(URLDecoder.decode(jarPath, StandardCharsets.UTF_8))) {
+
             Enumeration<JarEntry> entries = jarFile.entries();
             while (entries.hasMoreElements()) {
+
                 JarEntry entry = entries.nextElement();
-                if (entry.getName().startsWith(pathInJar)) {
-                    String relativePath = entry.getName().substring(pathInJar.length());
-                    Path outPath = TARGET_PACK.resolve(relativePath);
-                    if (entry.isDirectory()) {
-                        Files.createDirectories(outPath);
-                    } else {
-                        try (InputStream in = jarFile.getInputStream(entry)) {
-                            Files.createDirectories(outPath.getParent());
-                            Files.copy(in, outPath, StandardCopyOption.REPLACE_EXISTING);
-                        }
+                if (!entry.getName().startsWith(pathInJar)) continue;
+
+                String relativePath = entry.getName().substring(pathInJar.length());
+                Path outPath = TARGET_PACK.resolve(relativePath);
+
+                if (!entry.isDirectory()) {
+                    try (InputStream in = jarFile.getInputStream(entry)) {
+                        Files.createDirectories(outPath.getParent());
+                        Files.copy(in, outPath, StandardCopyOption.REPLACE_EXISTING);
                     }
-                }
+                } else Files.createDirectories(outPath);
             }
         }
+
     }
 }

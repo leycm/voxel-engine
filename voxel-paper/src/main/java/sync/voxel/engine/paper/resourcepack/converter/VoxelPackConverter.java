@@ -7,10 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.world;
+package sync.voxel.engine.paper.resourcepack.converter;
 
-import sync.voxel.engine.api.identifier.VoxUuIdentifiable;
-
-public interface VoxWorld extends VoxUuIdentifiable {
-
+public class VoxelPackConverter {
 }

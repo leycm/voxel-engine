@@ -9,6 +9,9 @@
  */
 package sync.voxel.engine.api;
 
+import org.slf4j.Logger;
+
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.Collection;
@@ -16,7 +19,17 @@ import java.util.UUID;
 
 public interface VoxEngine {
 
+    // ====== WORLD MANAGMENT ======
+
+    boolean registerWorld(VoxWorld world);
+
     VoxWorld getWorld(UUID uuid);
 
     Collection<VoxWorld> getWorlds();
+
+    // ====== VOXEL ENGINE TUNNEL ======
+
+    Logger logger();
+
+    String translate(String langCode, VoxIdentifier identifier);
 }

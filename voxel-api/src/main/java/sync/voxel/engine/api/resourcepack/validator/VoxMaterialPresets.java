@@ -32,11 +32,11 @@ public enum VoxMaterialPresets {
 
     PLANT(false, true),
 
-    ABSTRACT_ITEM(true, false),
+    ABSTRACT_MATERIAL(true, false),
 
-    EATABLE_ITEM(true, false),
+    EATABLE_MATERIAL(true, false),
 
-    EMPTY_ITEM(true, false),
+    RAW_MATERIAL(true, false),
 
     /**
      * Internal preset for vanilla-compatible materials.

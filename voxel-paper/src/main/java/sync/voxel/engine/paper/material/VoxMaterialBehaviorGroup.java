@@ -1,14 +1,25 @@
+/**
+ * VOXEL-LICENSE NOTICE
+ * <br><br>
+ * This software is part of VoxelSync under the Voxel Public License. <br>
+ * Source at: <a href="https://github.com/voxelsync/voxel/blob/main/LICENSE">GITHUB</a>
+ * <br><br>
+ * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
+ * Copyright (c) contributors
+ */
 package sync.voxel.engine.paper.material;
 
-import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.api.util.group.VoxBehaviorGroup;
+
+import sync.voxel.engine.api.registry.VoxBehaviorTag;
 import sync.voxel.engine.api.material.VoxMaterial;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class VoxMaterialBehaviorGroup implements VoxBehaviorGroup<VoxMaterial> {
+public class VoxMaterialBehaviorGroup implements VoxBehaviorTag<VoxMaterial> {
 
     private final Map<VoxIdentifier, VoxMaterial> elements;
     private final VoxIdentifier identifier;

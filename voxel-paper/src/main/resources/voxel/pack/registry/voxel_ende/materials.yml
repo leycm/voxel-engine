@@ -1,0 +1,49 @@
+voxel_ende:void_berry:
+  preset: EATABLE_MATERIAL # Creating a Material like minecraft:bread
+
+  appearance:
+    # Define model or texture paths to customize the item's appearance.
+    # If no namespace is specified, the item's namespace is used by default.
+
+    layer0: 'item/void_berry' # Sets texture layer '0' to 'textures/voxel_ende:item/void_berry.png'
+    particle: 'particle/void_berry_particle' # Sets texture layer 'particle' to 'textures/voxel_ende:particle/void_berry_particle.png'
+
+    # To set the same texture for all layers, use:
+    # all: 'item/void_berry' # Applies 'textures/voxel_ende:item/void_berry.png' to all texture layers.
+
+    # If you prefer using custom models:
+    # model: 'item/void_berry' # Uses 'models/voxel_ende:models/void_berry.json' as the model.
+
+  settings:
+    # Set material settings such as rarity or saturation values.
+
+    # EATABLE_ITEM-specific settings (see documentation for details).
+    saturation: 3 # Measured in half-hunger bars (maximum is 20).
+    golden_saturation: 2 # Measured in quarter-hunger bars (maximum is 40).
+
+
+voxel_ende:void_core:
+  preset: RAW_MATERIAL # Create a Raw Material no pre configs;
+
+  appearance:
+    all: 'item/void_hoe'
+
+  settings:
+
+    # Possible rarity values: COMMON, UNCOMMON, RARE, EPIC, LEGANDARY and ADMIN
+    # COMMON, UNCOMMON, RARE, EPIC are minecraft rarities
+    # LEGANDARY is like a minecraft rarity except its higher and golden
+    # ADMIN is used for materials like minecraft:command_block
+    rarity: UNCOMMON # Optional, COMMON is the default value.
+
+  nbt: | # Optional raw starting NBT data in JSON format
+    {
+    }
+
+  potion_effects:
+    onChest:
+      effect: 1 - 255;
+
+  attributes:
+    onChest:
+      attribute: value

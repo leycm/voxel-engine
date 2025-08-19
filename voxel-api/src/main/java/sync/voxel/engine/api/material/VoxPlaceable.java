@@ -7,10 +7,15 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.world;
+package sync.voxel.engine.api.material;
 
-import sync.voxel.engine.api.identifier.VoxUuIdentifiable;
+import org.bukkit.Location;
+import org.bukkit.event.player.PlayerInteractEvent;
 
-public interface VoxWorld extends VoxUuIdentifiable {
+public interface VoxPlaceable {
+
+    boolean canBePlaced(PlayerInteractEvent event);
+
+    void placeAtLocation(Location location);
 
 }
