@@ -9,15 +9,18 @@
  */
 package sync.voxel.engine.api;
 
+import org.slf4j.Logger;
+
+import sync.voxel.engine.api.identifier.VoxIdentifier;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NonNull;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 
 public final class VoxelEngine {
     private static VoxEngine engine = null;
 
-    // ===== CLASS PROVIDER =====
+    // ====== CLASS PROVIDER ======
 
     private static final class NotLoadedException extends IllegalStateException {
         private static final String MESSAGE = """
@@ -56,10 +59,14 @@ public final class VoxelEngine {
         throw new UnsupportedOperationException("This class cannot be instantiated.");
     }
 
-    // ===== VO_ENGINE TUNNEL =====
+    // ====== VOXEL ENGINE TUNNEL ======
 
     public static String translate(String langCode, VoxIdentifier identifier) {
         return engine.translate(langCode, identifier);
+    }
+
+    public static Logger logger() {
+        return engine.logger();
     }
 
 }

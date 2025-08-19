@@ -9,7 +9,7 @@
  */
 package sync.voxel.engine.api.world;
 
-import sync.voxel.engine.api.util.uuid.VoxUuIdentifiable;
+import sync.voxel.engine.api.identifier.VoxUuIdentifiable;
 
 public interface VoxWorld extends VoxUuIdentifiable {
 

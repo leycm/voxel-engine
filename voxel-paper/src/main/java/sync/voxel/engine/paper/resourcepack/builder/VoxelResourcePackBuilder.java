@@ -10,6 +10,7 @@
 package sync.voxel.engine.paper.resourcepack.builder;
 
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.VoxelEngine;
 import sync.voxel.engine.paper.VoxelPaperEngine;
 
 import java.io.*;
@@ -34,11 +35,11 @@ public class VoxelResourcePackBuilder {
      */
     public static void buildPack(String reason) {
         if (!Files.exists(TARGET_REGISTRY)) {
-            VoxelPaperEngine.LOGGER.info("\"registry/\" folder not found extracting default pack from JAR...");
+            VoxelEngine.logger().info("\"registry/\" folder not found extracting default pack from JAR...");
             boolean success = extractResourcePackFromJar();
-            if (!success) VoxelPaperEngine.LOGGER.error("Failed to extract resource pack from JAR.");
+            if (!success) VoxelEngine.logger().error("Failed to extract resource pack from JAR.");
         } else {
-            VoxelPaperEngine.LOGGER.debug("registry/ folder found skipping default pack copy.");
+            VoxelEngine.logger().debug("registry/ folder found skipping default pack copy.");
         }
     }
 
@@ -60,11 +61,11 @@ public class VoxelResourcePackBuilder {
                 throw new UnsupportedOperationException("Unsupported protocol: " + resource.getProtocol());
             }
 
-            VoxelPaperEngine.LOGGER.info("Resource pack extracted to plugins/voxel/pack.");
+            VoxelEngine.logger().info("Resource pack extracted to plugins/voxel/pack.");
             return true;
 
         } catch (Exception e) {
-            VoxelPaperEngine.LOGGER.error("Extraction failed: {}\n{}", e.getMessage(), e);
+            VoxelEngine.logger().error("Extraction failed: {}", e.getMessage(), e);
             return false;
         }
     }

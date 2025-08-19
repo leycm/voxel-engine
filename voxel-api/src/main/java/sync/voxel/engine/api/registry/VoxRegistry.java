@@ -10,91 +10,79 @@
 package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
+import sync.voxel.engine.api.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.api.util.namespace.VoxNameSpace;
-import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
- * A dynamic registry similar to an enum, holding uniquely identifiable elements.
+ * A dynamic registry system that manages uniquely identifiable elements,
+ * similar to an {@code enum}, but allowing runtime registration.
  *
- * @param <VRI> the type of elements must implement VoxIdentifiable
+ * @param <VRI> the type of elements stored in the registry,
+ *              must implement {@link VoxIdentifiable}.
  */
-public class VoxRegistry<VRI extends VoxIdentifiable> {
+public interface VoxRegistry<VRI extends VoxIdentifiable> {
 
-    protected final Map<VoxIdentifier, VRI> entries = new LinkedHashMap<>();
+    /** Global registry for voxel materials. */
+    VoxRegistries.MaterialRegistry MATERIALS = new VoxRegistries.MaterialRegistry();
+
+    /** Global registry for voxel material behavior tags. */
+    VoxRegistries.MaterialBehaviorTagRegistry MATERIALTAGS = new VoxRegistries.MaterialBehaviorTagRegistry();
+
+    /** Global registry for voxel namespaces. */
+    VoxRegistries.NameSpaceRegistry NAMESPACES = new VoxRegistries.NameSpaceRegistry();
 
     /**
-     * Registers an element into the registry.
+     * Registers a new element in this registry.
      *
-     * @param element the element to add
-     * @throws IllegalArgumentException if an element with the same identifier is already registered
+     * @param element the element to register
+     * @throws IllegalArgumentException if an element with the same identifier is already present
      */
-    public void register(@NotNull VRI element) {
-        VoxIdentifier identifier = element.identifier();
-        VoxNameSpace nameSpace = VoxNameSpace.of(identifier.namespace());
-
-        if (!VoxRegistries.NAME_SPACES.contains(nameSpace.identifier())) {
-            VoxRegistries.NAME_SPACES.register(nameSpace);
-        }
-
-        if (entries.containsKey(identifier)) {
-            throw new IllegalArgumentException("Identifier already registered: " + identifier);
-        }
-
-        entries.put(identifier, element);
-    }
+    void register(@NotNull VRI element);
 
     /**
-     * Returns an element by its identifier.
+     * Looks up an element by its {@link VoxIdentifier}.
      *
-     * @param id the identifier
-     * @return the element, or null if not found
+     * @param id the identifier of the element
+     * @return the matching element, or {@code null} if none is found
      */
-    public VRI valueOf(@NotNull VoxIdentifier id) {
-        return entries.get(id);
-    }
+    VRI valueOf(@NotNull VoxIdentifier id);
 
     /**
-     * Returns an element by its identifier.
+     * Looks up an element by its {@link NamespacedKey}.
      *
-     * @param identifier the identifier
-     * @return the element, or null if not found
+     * @param identifier the namespaced key of the element
+     * @return the matching element, or {@code null} if none is found
      */
-    public VRI valueOf(@NotNull NamespacedKey identifier) {
-        return entries.get(VoxIdentifier.represent(identifier));
-    }
+    VRI valueOf(@NotNull NamespacedKey identifier);
 
     /**
-     * Returns true if the registry contains an element with this identifier.
+     * Checks if this registry contains an element with the given identifier.
+     *
+     * @param id the identifier to check
+     * @return {@code true} if the registry contains an element with this identifier,
+     *         {@code false} otherwise
      */
-    public boolean contains(@NotNull VoxIdentifier id) {
-        return entries.keySet().stream().anyMatch(key -> key.equals(id));
-    }
+    boolean contains(@NotNull VoxIdentifier id);
 
     /**
-     * Returns all registered elements in insertion order.
+     * Returns all registered elements in the order they were inserted.
+     *
+     * @return a collection of all registered elements
      */
-    public Collection<VRI> values() {
-        return Collections.unmodifiableCollection(entries.values());
-    }
+    Collection<VRI> values();
 
     /**
      * Returns the number of registered elements.
+     *
+     * @return the size of the registry
      */
-    public int size() {
-        return entries.size();
-    }
+    int size();
 
     /**
-     * Clears all registered elements.
+     * Removes all elements from this registry.
      */
-    public void clear() {
-        entries.clear();
-    }
+    void clear();
 }

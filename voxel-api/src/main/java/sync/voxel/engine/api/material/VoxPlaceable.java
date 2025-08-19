@@ -7,18 +7,15 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.util.uuid;
+package sync.voxel.engine.api.material;
 
-import java.util.UUID;
+import org.bukkit.Location;
+import org.bukkit.event.player.PlayerInteractEvent;
 
-/**
- * Something that has a {@link java.util.UUID} identity.
- */
-public interface VoxUuIdentifiable {
+public interface VoxPlaceable {
 
-    /**
-     * Get the {@link java.util.UUID}
-     */
-    UUID uuid();
+    boolean canBePlaced(PlayerInteractEvent event);
+
+    void placeAtLocation(Location location);
 
 }

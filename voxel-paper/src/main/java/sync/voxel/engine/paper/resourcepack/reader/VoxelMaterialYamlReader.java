@@ -5,7 +5,7 @@ import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 import sync.voxel.engine.paper.resourcepack.entry.VoxPackMaterialEntry;
 
 import java.io.File;

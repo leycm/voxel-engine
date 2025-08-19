@@ -9,22 +9,40 @@
  */
 package sync.voxel.engine.paper;
 
-import sync.voxel.engine.api.VoxEngine;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
-import sync.voxel.engine.api.world.VoxWorld;
-import sync.voxel.engine.common.logger.VoxelLogger;
-import sync.voxel.engine.common.translation.TranslationManager;
+import org.jetbrains.annotations.ApiStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import sync.voxel.engine.api.VoxEngine;
+import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
+import sync.voxel.engine.paper.util.translation.VoxelTranslator;
+
 import java.util.*;
 
 public class VoxelPaperEngine implements VoxEngine {
 
-    public static VoxelLogger LOGGER = new VoxelLogger("VoxelEngine");
-    public static boolean IS_BUILDING;
 
-    private static final Set<VoxWorld> worlds = new HashSet<>();
-    private final TranslationManager translationManager = new TranslationManager(new File("plugins/voxel/pack/translations"), LOGGER);
+    private final Logger mainLogger;
+    private final VoxelTranslator translator;
+
+    private final Set<VoxWorld> worlds = new HashSet<>();
+
+    public VoxelPaperEngine() {
+        this.mainLogger = LoggerFactory.getLogger("VoxelEngine");
+        this.translator = new VoxelTranslator("plugins/voxel/pack/translations");
+    }
+
+    // ====== WORLD MANAGMENT ======
+
+    @ApiStatus.Internal
+    @Override
+    public boolean registerWorld(VoxWorld world) {
+        if (worlds.contains(world)) return false;
+
+        worlds.add(world);
+        return true;
+    }
 
     @Override
     public VoxWorld getWorld(UUID uuid) {
@@ -40,9 +58,16 @@ public class VoxelPaperEngine implements VoxEngine {
         return Collections.unmodifiableSet(worlds);
     }
 
+    // ====== VOXEL ENGINE TUNNEL ======
+
+    @Override
+    public Logger logger() {
+        return mainLogger;
+    }
+
     @Override
     public String translate(String langCode, VoxIdentifier identifier) {
-        return translationManager.translate(langCode, identifier);
+        return translator.translate(langCode, identifier);
     }
 
 }

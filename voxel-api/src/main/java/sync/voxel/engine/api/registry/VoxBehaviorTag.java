@@ -7,17 +7,17 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.util.group;
+package sync.voxel.engine.api.registry;
 
 import sync.voxel.engine.api.material.VoxMaterial;
-import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.VoxIdentifiable;
 
 /**
  * Represents a group of {@link VoxMaterial}s.
  * <p>
  * Material groups are useful for categorizing or applying bulk operations to sets of materials.
  */
-public interface VoxBehaviorGroup<VGI extends  VoxIdentifiable> extends VoxIdentifiable {
+public interface VoxBehaviorTag<VGI extends  VoxIdentifiable> extends VoxIdentifiable {
 
     /**
      * Adds an element to the group.

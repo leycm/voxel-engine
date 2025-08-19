@@ -11,14 +11,16 @@ package sync.voxel.engine.paper.resourcepack.converter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-
 import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.paper.VoxelPaperEngine;
+
+import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.api.registry.VoxRegistry;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
+
 import sync.voxel.engine.paper.material.VoxMaterialBehaviorGroup;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
-import sync.voxel.engine.api.registry.VoxRegistries;
 import sync.voxel.engine.paper.material.VoxelBukkitMaterial;
+
+import org.jetbrains.annotations.NotNull;
 
 public class VoxelVanillaConverter {
 
@@ -29,7 +31,7 @@ public class VoxelVanillaConverter {
 
     private static void convertMaterials() {
         for (Material material : Material.values()) {
-            VoxRegistries.MATERIAL.register(new VoxelBukkitMaterial(material));
+            VoxRegistry.MATERIALS.register(new VoxelBukkitMaterial(material));
         }
     }
 
@@ -45,14 +47,14 @@ public class VoxelVanillaConverter {
         VoxMaterialBehaviorGroup group = new VoxMaterialBehaviorGroup(VoxIdentifier.represent(tag.getKey()));
 
         for (Material material : tag.getValues()) {
-            VoxelBukkitMaterial voxelMaterial = (VoxelBukkitMaterial) VoxRegistries.MATERIAL.valueOf(VoxIdentifier.represent(material.getKey()));
+            VoxelBukkitMaterial voxelMaterial = (VoxelBukkitMaterial) VoxRegistry.MATERIALS.valueOf(VoxIdentifier.represent(material.getKey()));
             if (voxelMaterial != null) group.add(voxelMaterial);
         }
 
         try {
-            VoxRegistries.MATERIAL_GROUPS.register(group);
+            VoxRegistry.MATERIALTAGS.register(group);
         } catch (Exception e) {
-            VoxelPaperEngine.LOGGER.error("Fail to convert group with error \"{}\"", e.getMessage());
+            VoxelEngine.logger().error("Fail to convert group, {}", e.getMessage(), e);
         }
     }
 

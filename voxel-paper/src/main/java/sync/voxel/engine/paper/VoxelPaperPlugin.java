@@ -12,13 +12,12 @@ package sync.voxel.engine.paper;
 import com.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
+import org.slf4j.event.Level;
+import com.djaytan.bukkit.slf4j.api.BukkitLoggerFactory;
+
 import sync.voxel.engine.api.VoxelEngine;
-import sync.voxel.engine.common.logger.VoxelLogLevel;
 import sync.voxel.engine.paper.resourcepack.builder.VoxelResourcePackBuilder;
 import sync.voxel.engine.paper.resourcepack.converter.VoxelVanillaConverter;
 
@@ -28,18 +27,19 @@ public class VoxelPaperPlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        System.out.println();
+        BukkitLoggerFactory.provideBukkitLogger(this.getLogger());
         PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
         PacketEvents.getAPI().load();
     }
 
     @Override
     public void onEnable() {
+        BukkitLoggerFactory.provideBukkitLogger(this.getLogger());
+        PacketEvents.getAPI().init();
 
         VoxelPaperPlugin.plugin = this;
         VoxelEngine.register(new VoxelPaperEngine());
-        VoxelPaperEngine.LOGGER.setLevel(VoxelLogLevel.DEBUG);
-        PacketEvents.getAPI().init();
+        VoxelEngine.logger().isEnabledForLevel(Level.DEBUG);
 
         VoxelVanillaConverter.convertVanilla();
         VoxelResourcePackBuilder.buildPack("startup");

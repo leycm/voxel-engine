@@ -1,11 +1,11 @@
-package sync.voxel.engine.common.translation;
+package sync.voxel.engine.paper.util.translation;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
-import sync.voxel.engine.common.logger.VoxelLogger;
+import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -16,17 +16,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TranslationManager {
+public class VoxelTranslator {
 
     private final Map<String, Map<String, String>> langCache = new HashMap<>();
     private final Gson gson = new Gson();
 
     private final File translationsDir;
-    private final VoxelLogger logger;
 
-    public TranslationManager(@NotNull File translationsDir, VoxelLogger logger)  {
-        this.translationsDir = translationsDir;
-        this.logger = logger;
+    public VoxelTranslator(@NotNull String translationsStr)  {
+        this.translationsDir = new File(translationsStr);
 
         if (!translationsDir.exists()) translationsDir.mkdirs();
     }
@@ -72,7 +70,7 @@ public class TranslationManager {
                 }
 
             } catch (IOException e) {
-                logger.error("Error while reading from \"{}\" \n{}:", localFile.toString(), e.getMessage(), e);
+                VoxelEngine.logger().error("Error while reading from \"{}\" \n{}:", localFile.toString(), e.getMessage(), e);
             }
         }
 
@@ -85,7 +83,7 @@ public class TranslationManager {
             URL url = URL.of(URI.create(urlStr), null);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            connection.setRequestProperty("User-Agent", logger.getPrefix());
+            connection.setRequestProperty("User-Agent", VoxelEngine.logger().getName());
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
 
@@ -97,7 +95,7 @@ public class TranslationManager {
             }
 
         } catch (IOException e) {
-            logger.error("Error while reading from the web \"{}\" \n{}:", urlStr, e.getMessage(), e);
+            VoxelEngine.logger().error("Error while reading from the web \"{}\" \n{}:", urlStr, e.getMessage(), e);
         }
 
         return null;

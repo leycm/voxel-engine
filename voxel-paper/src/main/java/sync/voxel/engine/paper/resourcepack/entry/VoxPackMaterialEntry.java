@@ -11,8 +11,8 @@ package sync.voxel.engine.paper.resourcepack.entry;
 
 import lombok.Data;
 import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
-import sync.voxel.engine.api.util.identifier.VoxIdentifier;
-import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
+import sync.voxel.engine.api.identifier.VoxIdentifiable;
 
 import java.io.File;
 import java.util.Map;

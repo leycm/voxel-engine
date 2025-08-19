@@ -10,36 +10,71 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
-
 import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
-import sync.voxel.engine.api.util.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.VoxIdentifiable;
 
 /**
- * Represents a custom material in the Voxel engine that is linked to a Bukkit {@link Material}.
+ * Represents a material definition within the Voxel engine.
  * <p>
- * VoxMaterials are identifiable, map to a Minecraft {@link Material}, and can store custom attributes.
+ * A {@code VoxMaterial} is an identifiable resource that is associated with a
+ * Minecraft {@link Material}, while allowing additional custom attributes and rendering presets.
+ * <p>
+ * Implementations may represent both vanilla Minecraft materials and custom ones defined by the engine.
+ *
+ * @since 1.0.1
  */
 public interface VoxMaterial extends VoxIdentifiable {
 
     /**
-     * Convert to a default {@link org.bukkit.Material}
+     * Returns the corresponding vanilla {@link Material} for this material.
      * <p>
-     * Cannot be null or an {@link org.bukkit.Material}  like AIR except its {@code minecraft:air}.
+     * This method never returns {@code null}. The returned {@link Material} must be a valid Bukkit
+     * material and cannot be a placeholder such as {@link Material#AIR}, unless the identifier is
+     * explicitly {@code minecraft:air}.
+     *
+     * @return the linked {@link Material}, never {@code null}
+     *
+     * @since 1.0.1
      */
     Material toVaMaterial();
 
+    /**
+     * Checks whether this material represents a vanilla Minecraft material.
+     * <p>
+     * Vanilla materials map directly to {@link Material} values without custom overrides.
+     *
+     * @return {@code true} if this is a vanilla material, {@code false} if it is custom
+     *
+     * @since 1.0.1
+     */
     boolean isVanillaMaterial();
 
+    /**
+     * Returns the rendering preset type for this material.
+     * <p>
+     * The render type defines how the material is handled in resource packs
+     * (e.g. cutout, translucent, solid).
+     *
+     * @return the {@link VoxMaterialPresets} defining the render type
+     *
+     * @since 1.0.1
+     */
     VoxMaterialPresets getVoxRenderType();
 
     /**
-     * Gets a specific setting value from this material's configuration.
+     * Retrieves a custom attribute value for this material.
+     * <p>
+     * Attributes allow storing additional metadata, such as custom rendering properties,
+     * interaction rules, or engine-specific flags.
      *
-     * @param key The setting key to retrieve
-     * @param type The class type of the setting value
-     * @param defaultValue The default value to return if not found
-     * @param <T> The type of the setting value
-     * @return The setting value or defaultValue if not found
+     * @param key          the attribute key to look up
+     * @param type         the expected type of the attribute value
+     * @param defaultValue the value to return if the attribute is not found or cannot be converted
+     * @param <T>          the type of the attribute value
+     * @return the attribute value if present and compatible with {@code type},
+     *         otherwise {@code defaultValue}
+     *
+     * @since 1.0.1
      */
     <T> T getAttribute(String key, Class<T> type, T defaultValue);
 }

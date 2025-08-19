@@ -9,14 +9,22 @@
  */
 package sync.voxel.engine.paper.world;
 
+import org.bukkit.World;
+
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.UUID;
 
 public class VoxelWorld implements VoxWorld {
 
+    private World world;
+
+    public VoxelWorld (World world) {
+
+    }
+
     @Override
     public UUID uuid() {
-        return null;
+        return world.getUID();
     }
 }
