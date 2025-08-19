@@ -11,7 +11,7 @@ package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
 import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
-import sync.voxel.engine.api.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.interfaces.VoxIdentifiable;
 
 /**
  * Represents a material definition within the Voxel engine.

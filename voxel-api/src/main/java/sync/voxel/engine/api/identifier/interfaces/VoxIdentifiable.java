@@ -7,7 +7,9 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.identifier;
+package sync.voxel.engine.api.identifier.interfaces;
+
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 
 /**
  * Something that has a {@link VoxIdentifier}.
@@ -17,15 +19,20 @@ package sync.voxel.engine.api.identifier;
 public interface VoxIdentifiable {
 
     /**
-     * Get the {@link VoxIdentifier} of the object.
+     * Returns the identifier {@link VoxIdentifier} of this object.
+     *
+     * @return the VoxIdentifier of this object
      *
      * @since 1.0.1
      */
     VoxIdentifier identifier();
 
     /**
-     * Get the {@link VoxIdentifier} of the object.
-     * This only is an alt for {@link VoxIdentifiable#identifier()}
+     * Alias for {@link #identifier()}.
+     * <p>
+     * Provides a more descriptive method name for retrieving the {@link VoxIdentifier}.
+     *
+     * @return the VoxIdentifier of this object
      *
      * @since 1.0.1
      */
@@ -34,10 +41,10 @@ public interface VoxIdentifiable {
     }
 
     /**
-     * Identify if the object ist the one you want
+     * Checks if the given {@link VoxIdentifier} matches this object's {@link #identifier()}.
      *
-     * @param identifier the identifier to identify
-     * @return is {@code identifier} the identifier of the object
+     * @param identifier the VoxIdentifier to compare with this object's VoxIdentifier
+     * @return {@code true} if the given VoxIdentifier equals this object's VoxIdentifier, otherwise {@code false}
      *
      * @since 1.0.1
      */

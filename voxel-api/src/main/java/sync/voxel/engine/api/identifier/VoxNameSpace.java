@@ -12,6 +12,7 @@ package sync.voxel.engine.api.identifier;
 import org.bukkit.Material;
 
 import org.jetbrains.annotations.NotNull;
+import sync.voxel.engine.api.identifier.interfaces.VoxIdentifiable;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -10,7 +10,7 @@
 package sync.voxel.engine.api.registry;
 
 import sync.voxel.engine.api.material.VoxMaterial;
-import sync.voxel.engine.api.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.interfaces.VoxIdentifiable;
 
 /**
  * Represents a group of {@link VoxMaterial}s.

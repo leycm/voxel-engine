@@ -7,12 +7,14 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.identifier;
+package sync.voxel.engine.api.identifier.interfaces;
 
 import java.util.UUID;
 
 /**
  * Represents something that can be uniquely identified by a {@link UUID}.
+ *
+ * @since 1.0.1
  */
 public interface VoxUuIdentifiable {
 
@@ -20,6 +22,8 @@ public interface VoxUuIdentifiable {
      * Returns the unique {@link UUID} of this object.
      *
      * @return the UUID of this object
+     *
+     * @since 1.0.1
      */
     UUID uuid();
 

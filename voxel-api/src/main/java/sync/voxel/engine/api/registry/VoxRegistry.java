@@ -10,7 +10,7 @@
 package sync.voxel.engine.api.registry;
 
 import org.bukkit.NamespacedKey;
-import sync.voxel.engine.api.identifier.VoxIdentifiable;
+import sync.voxel.engine.api.identifier.interfaces.VoxIdentifiable;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
 import org.jetbrains.annotations.NotNull;
 
