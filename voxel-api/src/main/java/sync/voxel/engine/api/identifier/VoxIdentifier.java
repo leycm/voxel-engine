@@ -155,17 +155,32 @@ public final class VoxIdentifier {
         this.type = type;
     }
 
-    /** @return the namespace of this identifier */
+    /**
+     * Get the {@code namespace} of the VoxIdentifier
+     * @return the namespace of this identifier
+     *
+     * @since 1.0.1
+     */
     public String namespace() {
         return namespace;
     }
 
-    /** @return the key of this identifier */
+    /**
+     * Get the {@code key} of the VoxIdentifier
+     * @return the key of this identifier
+     *
+     * @since 1.0.1
+     */
     public String key() {
         return key;
     }
 
-    /** @return the type of this identifier, or {@code "none"} if not set */
+    /**
+     * Get the {@code type} of the VoxIdentifier
+     * @return the type of this identifier, or {@code "none"} if not set
+     *
+     * @since 1.0.1
+     */
     public String type() {
         return type;
     }

@@ -1,20 +1,27 @@
+/**
+ * VOXEL-LICENSE NOTICE
+ * <br><br>
+ * This software is part of VoxelSync under the Voxel Public License. <br>
+ * Source at: <a href="https://github.com/voxelsync/voxel/blob/main/LICENSE">GITHUB</a>
+ * <br><br>
+ * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
+ * Copyright (c) contributors
+ */
 package sync.voxel.engine.paper.util.translation;
+
+import sync.voxel.engine.api.VoxelEngine;
+import sync.voxel.engine.api.identifier.VoxIdentifier;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sync.voxel.engine.api.VoxelEngine;
-import sync.voxel.engine.api.identifier.VoxIdentifier;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
+import java.util.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
 
 public class VoxelTranslator {
 
@@ -26,7 +33,8 @@ public class VoxelTranslator {
     public VoxelTranslator(@NotNull String translationsStr)  {
         this.translationsDir = new File(translationsStr);
 
-        if (!translationsDir.exists()) translationsDir.mkdirs();
+        if (!translationsDir.exists()) //noinspection ResultOfMethodCallIgnored
+            translationsDir.mkdirs();
     }
 
     public String translate(String langCode, @NotNull VoxIdentifier identifier) {
@@ -60,18 +68,16 @@ public class VoxelTranslator {
         if (remoteMap != null) translations.putAll(remoteMap);
 
         File localFile = new File(translationsDir, langCode + ".json");
-        if (localFile.exists()) {
-            try (Reader reader = new InputStreamReader(new FileInputStream(localFile), StandardCharsets.UTF_8)) {
+        if (localFile.exists()) langCache.put(langCode, translations);;
 
-                Type type = new TypeToken<Map<String, String>>() {}.getType();
-                Map<String, String> localMap = gson.fromJson(reader, type);
-                if (localMap != null) {
-                    translations.putAll(localMap);
-                }
+        try (Reader reader = new InputStreamReader(new FileInputStream(localFile), StandardCharsets.UTF_8)) {
 
-            } catch (IOException e) {
-                VoxelEngine.logger().error("Error while reading from \"{}\" \n{}:", localFile.toString(), e.getMessage(), e);
-            }
+            Type type = new TypeToken<Map<String, String>>(){}.getType();
+            Map<String, String> localMap = gson.fromJson(reader, type);
+            if (localMap != null) translations.putAll(localMap);
+
+        } catch (IOException e) {
+            VoxelEngine.logger().error("Error while reading from \"{}\" \n{}:", localFile, e.getMessage(), e);
         }
 
         langCache.put(langCode, translations);

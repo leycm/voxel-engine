@@ -21,9 +21,11 @@ public interface VoxEngine {
 
     // ====== WORLD MANAGMENT ======
 
-    boolean registerWorld(VoxWorld world);
+    void registerWorld(UUID worldUid);
 
-    VoxWorld getWorld(UUID uuid);
+    void unregisterWorld(UUID worldUid);
+
+    VoxWorld getWorld(UUID worldUid);
 
     Collection<VoxWorld> getWorlds();
 

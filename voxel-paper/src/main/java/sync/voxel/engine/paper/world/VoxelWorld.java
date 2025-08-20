@@ -11,6 +11,8 @@ package sync.voxel.engine.paper.world;
 
 import org.bukkit.World;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import sync.voxel.engine.api.world.VoxWorld;
 
 import java.util.UUID;
@@ -19,7 +21,12 @@ public class VoxelWorld implements VoxWorld {
 
     private World world;
 
-    public VoxelWorld (World world) {
+    @Contract(value = "_ -> new", pure = true)
+    public static @NotNull VoxelWorld port(World world) {
+        return new VoxelWorld(world);
+    }
+
+    private VoxelWorld (World world) {
 
     }
 

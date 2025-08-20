@@ -9,14 +9,19 @@
  */
 package sync.voxel.engine.paper;
 
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sync.voxel.engine.api.VoxEngine;
 import sync.voxel.engine.api.world.VoxWorld;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
+import sync.voxel.engine.paper.listener.BukkitServerListener;
+import sync.voxel.engine.paper.util.StackTraceCallerUtil;
 import sync.voxel.engine.paper.util.translation.VoxelTranslator;
+import sync.voxel.engine.paper.world.VoxelWorld;
 
 import java.util.*;
 
@@ -26,7 +31,7 @@ public class VoxelPaperEngine implements VoxEngine {
     private final Logger mainLogger;
     private final VoxelTranslator translator;
 
-    private final Set<VoxWorld> worlds = new HashSet<>();
+    private final Map<UUID, VoxWorld> worlds = new HashMap<>();
 
     public VoxelPaperEngine() {
         this.mainLogger = LoggerFactory.getLogger("VoxelEngine");
@@ -37,25 +42,33 @@ public class VoxelPaperEngine implements VoxEngine {
 
     @ApiStatus.Internal
     @Override
-    public boolean registerWorld(VoxWorld world) {
-        if (worlds.contains(world)) return false;
+    public void registerWorld(UUID worldUid) throws UnsupportedOperationException {
+        if (!StackTraceCallerUtil.iamCalledBy(BukkitServerListener.class))
+            throw new UnsupportedOperationException("VoxEngine#registerWorld(UUID worldUid) can only be executed intern");
 
-        worlds.add(world);
-        return true;
+        VoxWorld world = VoxelWorld.port(Bukkit.getWorld(worldUid));
+        if (worlds.containsKey(worldUid)) return;
+        worlds.put(worldUid, world);
+    }
+
+    @ApiStatus.Internal
+    @Override
+    public void unregisterWorld(UUID worldUid) throws UnsupportedOperationException {
+        if (!StackTraceCallerUtil.iamCalledBy(BukkitServerListener.class))
+            throw new UnsupportedOperationException("VoxEngine#unregisterWorld(UUID worldUid) can only be executed intern");
+
+        if (!worlds.containsKey(worldUid)) return;
+        worlds.put(worldUid, null);
     }
 
     @Override
-    public VoxWorld getWorld(UUID uuid) {
-        for (VoxWorld world : worlds)
-            if (world.uuid().equals(uuid))
-                return world;
-
-        return null;
+    public @Nullable VoxWorld getWorld(UUID worldUid) {
+        return worlds.get(worldUid);
     }
 
     @Override
     public Collection<VoxWorld> getWorlds() {
-        return Collections.unmodifiableSet(worlds);
+        return worlds.values();
     }
 
     // ====== VOXEL ENGINE TUNNEL ======

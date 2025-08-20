@@ -21,8 +21,13 @@ import java.util.UUID;
 public class VelocityEngine implements VoxEngine {
 
     @Override
-    public boolean registerWorld(VoxWorld world) {
-        return false;
+    public void registerWorld(UUID worldUid) {
+
+    }
+
+    @Override
+    public void unregisterWorld(UUID worldUid) {
+
     }
 
     @Override
