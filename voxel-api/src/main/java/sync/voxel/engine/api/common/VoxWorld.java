@@ -7,7 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.world;
+package sync.voxel.engine.api.common;
 
 import sync.voxel.engine.api.identifier.interfaces.VoxUuIdentifiable;
 

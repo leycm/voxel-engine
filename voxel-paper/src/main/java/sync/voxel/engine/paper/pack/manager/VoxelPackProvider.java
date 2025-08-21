@@ -1,45 +1,34 @@
-/**
- * VOXEL-LICENSE NOTICE
- * <br><br>
- * This software is part of VoxelSync under the Voxel Public License. <br>
- * Source at: <a href="https://github.com/voxelsync/voxel/blob/main/LICENSE">GITHUB</a>
- * <br><br>
- * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
- * Copyright (c) contributors
- */
-package sync.voxel.engine.paper.resourcepack.builder;
+package sync.voxel.engine.paper.pack.manager;
 
 import org.jetbrains.annotations.NotNull;
 import sync.voxel.engine.api.VoxelEngine;
-import sync.voxel.engine.paper.VoxelPaperEngine;
+import sync.voxel.engine.paper.pack.VoxelPack;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-/**
- * Utility class for building and managing the voxel resource pack.
- */
-public class VoxelResourcePackBuilder {
-
+public class VoxelPackProvider {
     private static final String RESOURCE_BASE = "voxel/pack";
     private static final Path TARGET_PACK = Paths.get("plugins/voxel/pack");
     private static final Path TARGET_REGISTRY = TARGET_PACK.resolve("registry");
 
-    /**
-     * Builds the resource pack by ensuring required files are in place.
-     */
-    public static void buildPack(String reason) {
+    public void provideDefaultPack() {
         if (!Files.exists(TARGET_REGISTRY)) {
-            VoxelEngine.logger().info("\"registry/\" folder not found extracting default pack from JAR...");
+            VoxelEngine.getLogger().info("\"registry/\" folder not found extracting default pack from JAR...");
             boolean success = extractResourcePackFromJar();
-            if (!success) VoxelEngine.logger().error("Failed to extract resource pack from JAR.");
+            if (!success) VoxelEngine.getLogger().error("Failed to extract resource pack from JAR.");
         } else {
-            VoxelEngine.logger().debug("registry/ folder found skipping default pack copy.");
+            VoxelEngine.getLogger().debug("registry/ folder found skipping default pack copy.");
         }
     }
 
@@ -48,9 +37,9 @@ public class VoxelResourcePackBuilder {
      *
      * @return true if successful, false otherwise
      */
-    public static boolean extractResourcePackFromJar() {
+    public boolean extractResourcePackFromJar() {
         try {
-            URL resource = VoxelResourcePackBuilder.class.getClassLoader().getResource(RESOURCE_BASE);
+            URL resource = VoxelPack.class.getClassLoader().getResource(RESOURCE_BASE);
             if (resource == null) {
                 throw new IllegalStateException("Cannot find resource folder inside JAR: " + RESOURCE_BASE);
             }
@@ -61,11 +50,11 @@ public class VoxelResourcePackBuilder {
                 throw new UnsupportedOperationException("Unsupported protocol: " + resource.getProtocol());
             }
 
-            VoxelEngine.logger().info("Resource pack extracted to plugins/voxel/pack.");
+            VoxelEngine.getLogger().info("Resource pack extracted to plugins/voxel/pack.");
             return true;
 
         } catch (Exception e) {
-            VoxelEngine.logger().error("Extraction failed: {}", e.getMessage(), e);
+            VoxelEngine.getLogger().error("Extraction failed: {}", e.getMessage(), e);
             return false;
         }
     }

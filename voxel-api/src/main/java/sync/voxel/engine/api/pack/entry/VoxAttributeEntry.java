@@ -7,15 +7,13 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.material;
+package sync.voxel.engine.api.pack.entry;
 
-import org.bukkit.Location;
-import org.bukkit.event.player.PlayerInteractEvent;
+public interface VoxAttributeEntry extends VoxRegistryEntry {
+    String getAttribute();
 
-public interface VoxPlaceable {
+    double getValue();
 
-    boolean canBePlaced(PlayerInteractEvent event);
-
-    void placeAtLocation(Location location);
+    String getOperation();
 
 }

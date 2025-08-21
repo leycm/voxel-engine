@@ -7,7 +7,11 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.paper.resourcepack.converter;
+package sync.voxel.engine.api.pack.entry;
 
-public class VoxelPackConverter {
+public interface VoxEffectEntry extends VoxRegistryEntry {
+    String getEffect();
+
+    int getAmplifier();
+
 }

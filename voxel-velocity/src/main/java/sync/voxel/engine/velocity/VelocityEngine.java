@@ -12,7 +12,7 @@ package sync.voxel.engine.velocity;
 import org.slf4j.Logger;
 import sync.voxel.engine.api.VoxEngine;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
-import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.api.common.VoxWorld;
 
 import java.util.Collection;
 import java.util.List;

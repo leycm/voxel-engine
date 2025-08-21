@@ -77,7 +77,7 @@ public class VoxelTranslator {
             if (localMap != null) translations.putAll(localMap);
 
         } catch (IOException e) {
-            VoxelEngine.logger().error("Error while reading from \"{}\" \n{}:", localFile, e.getMessage(), e);
+            VoxelEngine.getLogger().error("Error while reading from \"{}\" \n{}:", localFile, e.getMessage(), e);
         }
 
         langCache.put(langCode, translations);
@@ -89,7 +89,7 @@ public class VoxelTranslator {
             URL url = URL.of(URI.create(urlStr), null);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            connection.setRequestProperty("User-Agent", VoxelEngine.logger().getName());
+            connection.setRequestProperty("User-Agent", VoxelEngine.getLogger().getName());
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
 
@@ -101,7 +101,7 @@ public class VoxelTranslator {
             }
 
         } catch (IOException e) {
-            VoxelEngine.logger().error("Error while reading from the web \"{}\" \n{}:", urlStr, e.getMessage(), e);
+            VoxelEngine.getLogger().error("Error while reading from the web \"{}\" \n{}:", urlStr, e.getMessage(), e);
         }
 
         return null;

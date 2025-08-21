@@ -3,13 +3,16 @@ name: VoxelEngine
 version: '${version}'
 main: sync.voxel.engine.paper.VoxelPaperPlugin
 api-version: '1.21'
-prefix: Voxel
-authors: [ VoxelSync ]
+prefix: VoxelEngine
+authors:
+  - VoxelSync
+  - LeyCM
+
 commands:
   voxelengine:
     description: "Main Command for Voxel Engine"
-    aliases: [ve,vengine, vxe]
+    aliases: [ve, vengine, vxe]
     permissions:
-      voxelengine.command.main:
+      voxelengine.command.*:
       voxelengine.*:
 

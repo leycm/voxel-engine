@@ -7,13 +7,11 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.api.resourcepack.validator;
+package sync.voxel.engine.api.pack.validator;
 
-import lombok.Getter;
 import org.jetbrains.annotations.ApiStatus;
 
-@Getter
-public enum VoxMaterialPresets {
+public enum VoxMaterialPreset {
     SOLID_BLOCK(false, true),
 
     BLOCK_ENTITY(false, true),
@@ -54,9 +52,17 @@ public enum VoxMaterialPresets {
      * @param customModel whether this preset supports custom models
      * @param placeable whether blocks/items with this preset can be placed in the world
      */
-    VoxMaterialPresets(boolean customModel, boolean placeable) {
+    VoxMaterialPreset(boolean customModel, boolean placeable) {
         this.customModel = customModel;
         this.placeable = placeable;
+    }
+
+    public boolean hasCustomModel() {
+        return customModel;
+    }
+
+    public boolean isPlaceable() {
+        return placeable;
     }
 
 }

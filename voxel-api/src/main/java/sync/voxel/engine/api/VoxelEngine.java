@@ -65,7 +65,7 @@ public final class VoxelEngine {
         return engine.translate(langCode, identifier);
     }
 
-    public static Logger logger() {
+    public static Logger getLogger() {
         return engine.logger();
     }
 

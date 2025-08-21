@@ -7,13 +7,13 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.paper.world;
+package sync.voxel.engine.paper.common;
 
 import org.bukkit.World;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.api.common.VoxWorld;
 
 import java.util.UUID;
 

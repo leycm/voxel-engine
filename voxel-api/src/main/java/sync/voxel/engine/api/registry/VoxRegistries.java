@@ -9,10 +9,12 @@
  */
 package sync.voxel.engine.api.registry;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import sync.voxel.engine.api.event.material.MaterialRegisterEvent;
 import sync.voxel.engine.api.material.VoxMaterial;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
 import sync.voxel.engine.api.identifier.VoxNameSpace;
@@ -84,6 +86,19 @@ public interface VoxRegistries {
          */
         @ApiStatus.Internal
         protected MaterialRegistry() {}
+
+        /**
+         * Registers a new element in this registry.
+         *
+         * @param element the element to register
+         * @throws IllegalArgumentException if an element with the same identifier is already present
+         */
+        @Override
+        public void register(@NotNull VoxMaterial element) {
+            MaterialRegisterEvent event = new MaterialRegisterEvent(element);
+            Bukkit.getServer().getPluginManager().callEvent(event);
+            if (!event.isCancelled()) super.register(event.getMaterial());
+        }
 
         /**
          * Resolves a {@link VoxMaterial} from its corresponding vanilla {@link Material}.

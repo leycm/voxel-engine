@@ -10,7 +10,7 @@
 package sync.voxel.engine.api.material;
 
 import org.bukkit.Material;
-import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
+import sync.voxel.engine.api.pack.validator.VoxMaterialPreset;
 import sync.voxel.engine.api.identifier.interfaces.VoxIdentifiable;
 
 /**
@@ -50,16 +50,16 @@ public interface VoxMaterial extends VoxIdentifiable {
     boolean isVanillaMaterial();
 
     /**
-     * Returns the rendering preset type for this material.
+     * Returns the {@link VoxMaterialPreset} preset type for this material.
      * <p>
      * The render type defines how the material is handled in resource packs
      * (e.g. cutout, translucent, solid).
      *
-     * @return the {@link VoxMaterialPresets} defining the render type
+     * @return the {@link VoxMaterialPreset} defining the render type
      *
      * @since 1.0.1
      */
-    VoxMaterialPresets getVoxRenderType();
+    VoxMaterialPreset getMaterialPreset();
 
     /**
      * Retrieves a custom attribute value for this material.

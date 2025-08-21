@@ -16,12 +16,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sync.voxel.engine.api.VoxEngine;
-import sync.voxel.engine.api.world.VoxWorld;
+import sync.voxel.engine.api.common.VoxWorld;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
 import sync.voxel.engine.paper.listener.BukkitServerListener;
 import sync.voxel.engine.paper.util.StackTraceCallerUtil;
 import sync.voxel.engine.paper.util.translation.VoxelTranslator;
-import sync.voxel.engine.paper.world.VoxelWorld;
+import sync.voxel.engine.paper.common.VoxelWorld;
 
 import java.util.*;
 

@@ -7,7 +7,7 @@
  * Copyright (c) Ley <cm.ley.cm@gmail.com> <br>
  * Copyright (c) contributors
  */
-package sync.voxel.engine.paper.resourcepack.converter;
+package sync.voxel.engine.paper.pack.converter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -54,7 +54,7 @@ public class VoxelVanillaConverter {
         try {
             VoxRegistry.MATERIALTAGS.register(group);
         } catch (Exception e) {
-            VoxelEngine.logger().error("Fail to convert group, {}", e.getMessage(), e);
+            VoxelEngine.getLogger().error("Fail to convert group, {}", e.getMessage(), e);
         }
     }
 

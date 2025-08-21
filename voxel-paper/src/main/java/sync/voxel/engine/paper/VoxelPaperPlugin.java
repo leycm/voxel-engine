@@ -18,8 +18,8 @@ import org.slf4j.event.Level;
 import com.djaytan.bukkit.slf4j.api.BukkitLoggerFactory;
 
 import sync.voxel.engine.api.VoxelEngine;
-import sync.voxel.engine.paper.resourcepack.builder.VoxelResourcePackBuilder;
-import sync.voxel.engine.paper.resourcepack.converter.VoxelVanillaConverter;
+import sync.voxel.engine.paper.pack.VoxelPack;
+import sync.voxel.engine.paper.pack.converter.VoxelVanillaConverter;
 
 public class VoxelPaperPlugin extends JavaPlugin {
 
@@ -27,7 +27,6 @@ public class VoxelPaperPlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        BukkitLoggerFactory.provideBukkitLogger(this.getLogger());
         PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
         PacketEvents.getAPI().load();
     }
@@ -39,10 +38,10 @@ public class VoxelPaperPlugin extends JavaPlugin {
 
         VoxelPaperPlugin.plugin = this;
         VoxelEngine.register(new VoxelPaperEngine());
-        VoxelEngine.logger().isEnabledForLevel(Level.DEBUG);
+        VoxelEngine.getLogger().isEnabledForLevel(Level.TRACE);
 
         VoxelVanillaConverter.convertVanilla();
-        VoxelResourcePackBuilder.buildPack("startup");
+        VoxelPack.buildPack("startup");
 
     }
 

@@ -18,9 +18,4 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${project.properties["minecraft_version"]}-R0.1-SNAPSHOT")
 
     compileOnly("com.github.retrooper:packetevents-spigot:2.8.0")
-
-    compileOnly("org.projectlombok:lombok:${project.properties["lombok_version"]}")
-    annotationProcessor("org.projectlombok:lombok:${project.properties["lombok_version"]}")
-    testCompileOnly("org.projectlombok:lombok:${project.properties["lombok_version"]}")
-    testAnnotationProcessor("org.projectlombok:lombok:${project.properties["lombok_version"]}")
 }

@@ -11,7 +11,7 @@ package sync.voxel.engine.paper.material;
 
 import org.bukkit.Material;
 
-import sync.voxel.engine.api.resourcepack.validator.VoxMaterialPresets;
+import sync.voxel.engine.api.pack.validator.VoxMaterialPreset;
 import sync.voxel.engine.api.material.VoxMaterial;
 import sync.voxel.engine.api.identifier.VoxIdentifier;
 
@@ -38,8 +38,8 @@ public class VoxelBukkitMaterial implements VoxMaterial {
     }
 
     @Override
-    public VoxMaterialPresets getVoxRenderType() {
-        return VoxMaterialPresets.VANILLA;
+    public VoxMaterialPreset getVoxRenderType() {
+        return VoxMaterialPreset.VANILLA;
     }
 
     @Override
