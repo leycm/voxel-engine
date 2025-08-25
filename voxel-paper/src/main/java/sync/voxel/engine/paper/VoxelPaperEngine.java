@@ -10,8 +10,6 @@
 package sync.voxel.engine.paper;
 
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +20,9 @@ import sync.voxel.engine.paper.listener.BukkitServerListener;
 import sync.voxel.engine.paper.util.StackTraceCallerUtil;
 import sync.voxel.engine.paper.util.translation.VoxelTranslator;
 import sync.voxel.engine.paper.common.VoxelWorld;
+
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 

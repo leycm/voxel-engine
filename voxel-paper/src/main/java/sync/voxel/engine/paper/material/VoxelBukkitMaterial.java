@@ -38,9 +38,10 @@ public class VoxelBukkitMaterial implements VoxMaterial {
     }
 
     @Override
-    public VoxMaterialPreset getVoxRenderType() {
+    public VoxMaterialPreset getMaterialPreset() {
         return VoxMaterialPreset.VANILLA;
     }
+
 
     @Override
     public <T> T getAttribute(String key, Class<T> type, T defaultValue) {
